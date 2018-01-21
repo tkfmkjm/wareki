@@ -1,3 +1,3 @@
-#WAREKI Calculator
+# WAREKI Calculator
 
 This is Wareki Calculator.
