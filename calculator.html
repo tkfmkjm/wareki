@@ -1,31 +1,44 @@
 <html>
+
 <head>
-<title>リアルタイム計算のサンプル</title>
+  <title>リアルタイム計算のサンプル</title>
 </head>
 <body>
-<form>
-<table border = "1">
-<tr> <td> <input id = "input01" type = "text" readonly> </input> </td> </tr>
-<tr> <td> <input id = "input02" type = "text"> </input> </td> </tr>
-<tr> <td id = "answer"></td> </tr>
-</table>
-</form>
-<script type = "text/javascript">
-<!--
-window.onload = function() {
-var input01 = document.getElementById( "input01" ); // DOM要素を用意しておく
-var input02 = document.getElementById( "input02" ); // DOM要素を用意しておく
-var answer = document.getElementById( "answer" ); // DOM要素を用意しておく
+  <form>
 
-input01.value = "7"; // 初期化
-input02.value = ""; // 初期化
-answer.value = ""; // 初期化
 
-input02.onkeyup = function() { // キー入力が終わった瞬間に実行される関数の宣言
-answer.innerHTML = parseInt( input01.value, 10 ) * parseInt( input02.value, 10 ); // 実際の計算
-};
-}
-// -->
-</script>
+    
+    <table border="1">
+      <tr>
+        <td> <input id="input01" type="text" readonly> </input>
+        </td>
+      </tr>
+      <tr>
+        <td> <input id="input02" type="text"> </input>
+        </td>
+      </tr>
+      <tr>
+        <td id="answer"></td>
+      </tr>
+    </table>
+  </form>
+  <script type="text/javascript">
+    <!--
+    window.onload = function() {
+      var input01 = document.getElementById("input01"); // DOM要素を用意しておく
+      var input02 = document.getElementById("input02"); // DOM要素を用意しておく
+      var answer = document.getElementById("answer"); // DOM要素を用意しておく
+
+      input01.value = "7"; // 初期化
+      input02.value = ""; // 初期化
+      answer.value = ""; // 初期化
+
+      input02.onkeyup = function() { // キー入力が終わった瞬間に実行される関数の宣言
+        answer.innerHTML = parseInt(input01.value, 10) * parseInt(input02.value, 10); // 実際の計算
+      };
+    }
+    // -->
+  </script>
 </body>
+
 </html>

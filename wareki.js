@@ -1,5 +1,6 @@
 window.onload = function() {
 
+
   document.getElementById("convert1").onclick = function() {
     var y = document.getElementById("seireki").value;
     y = parseInt(y); // Pick only number
@@ -7,13 +8,13 @@ window.onload = function() {
     if (isNaN(y)) {
       s = "<i class='fa fa-exclamation-circle fa-red' aria-hidden='true'></i> Please type the year you want to convert.";
     } else if (y > 1988) {
-      s = "<i class='fa fa-check-circle fa-green' aria-hidden='true'></i> " + y + " is Heisei " + (y - 1988) + "<br><small><a href='https://en.wikipedia.org/wiki/" + y + "'>" + "What happened this year?</a></small>";
+      s = "<i class='fa fa-check-circle fa-green' aria-hidden='true'></i> " + y + " is Heisei(平成) " + (y - 1988) + "<br><small><a href='https://en.wikipedia.org/wiki/" + y + "'>" + "What happened this year?</a></small>";
     } else if (y > 1925) {
-      s = "<i class='fa fa-check-circle fa-green' aria-hidden='true'></i> " + y + " is Showa " + (y - 1925) + "<br><small><a href='https://en.wikipedia.org/wiki/" + y + "'>" + "What happened this year?</a></small>";
+      s = "<i class='fa fa-check-circle fa-green' aria-hidden='true'></i> " + y + " is Showa(昭和) " + (y - 1925) + "<br><small><a href='https://en.wikipedia.org/wiki/" + y + "'>" + "What happened this year?</a></small>";
     } else if (y > 1911) {
-      s = "<i class='fa fa-check-circle fa-green' aria-hidden='true'></i> " + y + " is Taisho " + (y - 1911) + "<br><small><a href='https://en.wikipedia.org/wiki/" + y + "'>" + "What happened this year?</a></small>";
+      s = "<i class='fa fa-check-circle fa-green' aria-hidden='true'></i> " + y + " is Taisho(大正) " + (y - 1911) + "<br><small><a href='https://en.wikipedia.org/wiki/" + y + "'>" + "What happened this year?</a></small>";
     } else if (y > 1867) {
-      s = "<i class='fa fa-check-circle fa-green' aria-hidden='true'></i> " + y + " is Meiji " + (y - 1867) + "<br><small><a href='https://en.wikipedia.org/wiki/" + y + "'>" + "What happened this year?</a></small>";
+      s = "<i class='fa fa-check-circle fa-green' aria-hidden='true'></i> " + y + " is Meiji(明治) " + (y - 1867) + "<br><small><a href='https://en.wikipedia.org/wiki/" + y + "'>" + "What happened this year?</a></small>";
     } else {
       s = "<i class='fa fa-exclamation-circle fa-red' aria-hidden='true'></i> Are you immortal? Please type later than 1868 (Meiji 1).";
     }

@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+
   <meta charset="utf-8">
   <link href="style.css" rel="stylesheet">
-
   <!-- load fontawesome -->
   <script src="https://use.fontawesome.com/22959cf9cd.js"></script>
 
+  <!-- NO IE -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- activate responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Japanese Era and Western Calender Converter</title>
   <!-- Load Bootstrap CSS -->
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <!-- Load Bootstrap JS -->
-  <script src="../js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
   <!-- Load jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Load Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <title>Japanese and Werstern Calender Converter</title>
   <script type="text/javascript" src="wareki.js" charset="UTF-8"></script>
+
   <!-- Google Analytics -->
   <script>
     (function(i, s, o, g, r, a, m) {
@@ -37,27 +43,34 @@
     ga('send', 'pageview');
   </script>
   <!-- Google Analytics -->
-
 </head>
 
 <body>
 
-  <div class="col-md-6  col-md-offset-3">
-    <h1 class="text-center">Japanese and Werstern Calender Converter</h1>
-    <div class="col-xs-12 col-sm-12 col-md-6">
-      <p>Although most people in Japan use, or at least are familiar with, the Western calendar (seireki), the traditional calendar (wareki) is still used for official documents such as a resume and driver's license.</p>
+    <div class="container-fluid">
 
-      <p>The traditional Japanese calendar is based on the reign period of the emperor. Each time a different emperor begins to rule, a new counting of the years begins and the period acquires a new name.</p>
+      <h1 class="text-center"><img src="logo.png" alt="Wareki logo" id="sitelogo"></h1>
 
-      <p>Let's figure out what Japanese era you were born in! (o^-^o)</p>
+      <h2 class="text-center">Japanese and Werstern Calender Converter</h2>
+
+      <div class="row">
+
+<!-- side margin -->
+<div class="col-lg-3 col-md-2 col-sm-1"></div>
+<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
 
 
-      <div class="col-md-6 col-xs-12 col-sm-12">
+          <h2 class="description">What is this?</h2>
+          <p class="description">Although most people in Japan use, or at least are familiar with the Western calendar (<i>seireki: 西暦</i>), the traditional calendar (<i>wareki: 和暦</i>) is still used for official documents such as a resume and driver's license. The traditional Japanese calendar is based on the reign period of the emperor. Each time a different emperor begins to rule, a new counting of the years begins and the period acquires a new name. This calculator convert seireki to wareki.</p>
+
+
         <div id="result"></div>
 
         <form id="sampleForm" method="get">
-          <p><b>From Western Calender: </b><input type="number" id="seireki" name="seireki" class="form-control" placeholder="Type year"></p>
-          <p><input type="button" value="Convert to Japanese Calender" id="convert1" class="btn btn-primary col-md-12 col-xs-12 col-sm-12"></p>
+
+          <p><b>From Western Calender: </b><input type="number" id="seireki" name="seireki" class="form-control" onkeypress="hoge(event.keyCode)" placeholder="Type year"></p>
+
+          <p><input type="button" value="Convert to Japanese Calender" id="convert1" class="btn col-md-12 col-xs-12 col-sm-12"></p>
         </form>
 
         <br><br>
@@ -72,17 +85,21 @@
 <option value="Taisho">Taisho (大正)
 <option value="Meiji">Meiji (明治)
 </select></p>
-
           <p><input type="number" id="wareki1" name="wareki" class="form-control" placeholder="Type Japanese year"></p>
-          <p><input type="button" value="Convert to Western Calender" id="convert2" class="btn btn-primary col-md-12 col-xs-12 col-sm-12"></p>
+          <p><input type="button" value="Convert to Western Calender" id="convert2" class="btn col-md-12 col-xs-12 col-sm-12"></p>
         </form>
-        <br><br><br><br>
 
-      </div>
-
+<!-- Entire -->
+</div>
       <p class="text-center col-md-12 col-xs-12 col-sm-12">&copy; <a href="http://takafumikojima.com">Takafumi Kojima</a></p>
 
-    </div>
+
+<!-- /container-fluid -->
+</div>
+
+<!-- /row -->
+</div>
+
 
 </body>
 

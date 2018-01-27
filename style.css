@@ -4,7 +4,12 @@
 body {
 	padding: 10px;
 	color: #666 !important;
-	font-family: 'Roboto Slab', serif !important;
+}
+
+img#sitelogo {
+	width: 15vw;
+	min-width: 200px;
+	max-width: 500px;
 }
 
 div#result p{
@@ -13,19 +18,39 @@ div#result p{
     border: 1px solid #c8dbea;
 	font-size: 160%;
 	text-align: center;
-	border-radius: 5px;        /* CSS3草案 */  
-    -webkit-border-radius: 5px;    /* Safari,Google Chrome用 */  
-    -moz-border-radius: 5px;   /* Firefox用 */  
+	border-radius: 5px;        /* CSS3草案 */
+    -webkit-border-radius: 5px;    /* Safari,Google Chrome用 */
+    -moz-border-radius: 5px;   /* Firefox用 */
 }
 
 div#result p small{
 	font-size: 70%;
 }
 
+.btn {
+	background-color: #ff617b;
+	color: #ffffff;
+}
+
 h1 {
-	font-family: 'Oleo Script', cursive !important;
-	margin: 40px 5px !important;
-	color: #3771a3 !important;
+		margin: 3vw 0 0 0 !important;
+}
+
+h2.text-center {
+	margin: 0px 0 4vw 0 !important;
+	padding: 0px !important;
+	font-size:calc(9px + 0.5vw) !important;
+	color: #c0c0c0 !important;
+}
+
+h2.description {
+	font-size:calc(12px + 0.7vw) !important;
+	color: #ff617b !important;
+	font-weight: bold;
+}
+
+p.description{
+	margin-bottom: 30px;
 }
 
 .fa-green:before
