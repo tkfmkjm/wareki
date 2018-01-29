@@ -62,3 +62,7 @@ p.description{
 {
 	color: #d82a2a ;
 }
+
+form:last-of-type {
+	margin: 20px 0;
+}
