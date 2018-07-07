@@ -1,4 +1,4 @@
-# _wareki_
+# _Wareki_
 
 #### _Japanese and Western Calender Converter, 01.28.2018_
 
