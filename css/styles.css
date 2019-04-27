@@ -1,6 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Oleo+Script);
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
-
 body {
 	padding: 10px;
 	color: #666 !important;
@@ -32,8 +29,13 @@ div#result p small{
 	color: #ffffff;
 }
 
+h1, h2 {
+	font-family: 'Biryani', sans-serif;
+}
+
 h1 {
-		margin: 3vw 0 0 0 !important;
+		margin: 3vw 0 1vw 0 !important;
+		color:#ff617b;
 }
 
 h2.text-center {
@@ -46,7 +48,6 @@ h2.text-center {
 h2.description {
 	font-size:calc(12px + 0.7vw) !important;
 	color: #ff617b !important;
-	font-weight: bold;
 }
 
 p.description{
