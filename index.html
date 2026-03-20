@@ -2,24 +2,32 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <!-- NO IE -->
+  <!-- IE対応のためのメタ情報（このサイトは基本的にIEを想定しない） -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- activate responsive design -->
+  <!-- レスポンシブ（画面幅に応じてレイアウトを調整） -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Japanese and Werstern Calender Converter</title>
-  <!-- bootstrap cdn -->
+  <!--
+    外部ライブラリの役割:
+    - Bootstrap: レイアウト（grid）とフォーム見た目
+    - Font Awesome: 結果に表示するステータスアイコン（チェック/注意）
+    - Google Fonts: 見出しのフォント
+
+    変換ロジック（元号/西暦変換、曜日計算）は `js/wareki.js` にあります。
+  -->
+  <!-- Bootstrap CDN -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-  <!-- custom css -->
+  <!-- カスタムCSS -->
   <link rel="stylesheet" href="css/styles.css">
-  <!-- fontawesome cdn -->
+  <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- custom js -->
+  <!-- カスタムJS（このサイトの変換ロジック） -->
   <script src="js/wareki.js" defer></script>
 
-<!-- Google Font -->
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Biryani:800" rel="stylesheet"> 
 
-  <!-- <Google Analytics> -->
+  <!-- Google Analytics（計測コード） -->
   <script>
     (function(i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r;
@@ -36,11 +44,15 @@
     ga('create', 'UA-12408402-4', 'auto');
     ga('send', 'pageview');
   </script>
-  <!-- </Google Analytics> -->
+  <!-- /Google Analytics -->
 </head>
 <body>
   <!-- <container> -->
   <div class="container">
+    <!--
+      ページ上部（タイトル）と変換フォーム群。
+      変換結果は `div#result` に書き込まれます（`js/wareki.js` が `innerHTML` を更新）。
+    -->
     <h1 class="text-center">GenGo</h1>
     <h2 class="text-center">Japanese and Western Calender Converter</h2>
     <!-- <row> -->
@@ -52,15 +64,55 @@
         <h2 class="description">What is this?</h2>
         <p class="description">Although most people in Japan use, or at least are familiar with the Western calendar (<em>seireki: 西暦</em>), the traditional calendar (<em>wareki: 和暦 / gengo: 元号</em>) is still used for official documents such as a resume and driver's license. The traditional Japanese calendar is based on the reign period of the emperor. Each time a different emperor begins to rule, a new counting of the years begins and the period acquires a new name. This calculator convert seireki to wareki.</p>
 
+        <!--
+          結果表示エリア:
+          - `js/wareki.js` がここ（`div#result`）の `innerHTML` を差し替えます
+          - 表示される内容は「元号/西暦（年/月/日）」と「曜日」です
+        -->
         <div id="result"></div>
         <!-- form1 -->
         <form id="form1">
-          <!-- input -->
+          <!-- =========================================================
+               form1（西暦 -> 和暦）:
+               入力:
+               - `#seireki` = 西暦の年
+               - `#month1` / `#day1` = 西暦の月日（常に使用）
+
+               処理:
+               - 入力した (y, m, d) が「存在する日付か」をJSで検証
+               - その日付が属する元号（Reiwa/Heisei/Showa/Taisho/Meiji）を境界日から確定
+               - 元号年（eraYear）を計算
+               - 曜日を計算して結果に追記
+
+               出力:
+               - 元号名 + 元号年 + 曜日
+               ========================================================= -->
           <div class="form-group">
             <label for="seireki">Type Western Year:</label>
+            <!-- 西暦（グレゴリオ暦）の年（yyyy） -->
             <input class="form-control" id="seireki" placeholder="Input Year" required type="number">
           </div>
-          <!-- <p><strong>From Western Calender: </strong><input type="number" id="seireki" name="seireki" class="form-control" placeholder="Input year"></p> -->
+          <!-- =========================================================
+               西暦の月日（常に必須）:
+               - この月日が元号境界（元号の開始日）を跨いでいるかどうかを判定するために使います
+               - この月日が曜日計算にも使われます（曜日は日付が確定してから計算します）
+          ========================================================= -->
+          <div id="monthDay1" class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <label for="month1">Month:</label>
+                <!-- 月（1-12） -->
+                <input class="form-control" id="month1" placeholder="1-12" min="1" max="12" type="number" required>
+              </div>
+              <div class="col-6">
+                <label for="day1">Date:</label>
+                <!-- 日（1-31）
+                     ※「存在する日付か」はJS側で最終チェックします -->
+                <input class="form-control" id="day1" placeholder="1-31" min="1" max="31" type="number" required>
+              </div>
+            </div>
+          </div>
+          <!-- <p><strong>西暦入力（旧コード）:</strong><input type="number" id="seireki" name="seireki" class="form-control" placeholder="年"></p> -->
           <!-- submit button -->
           <div class="text-center">
             <button class="btn btn-default" id="convert1" type="submit">Convert to Japanese Calender</button>
@@ -71,7 +123,22 @@
 
         <!-- <form2> -->
         <form id="form2">
-          <!-- <p><strong>From Japanese Calender :</strong></p> -->
+          <!-- =========================================================
+               form2（和暦 -> 西暦）:
+               入力:
+               - `#nengou1` = 元号（Reiwa/Heisei/...）
+               - `#wareki` = 元号年（例: 令和 3年）
+               - `#month2` / `#day2` = 月日（常に使用）
+
+               処理:
+               - 元号IDから元号の開始日を引き、(元号年 -> 西暦年) に変換します
+               - 変換後の (西暦y, 月m, 日d) が「存在する日付か」をJSで検証します
+               - さらに「その月日が元号の有効範囲内か」も開始日/終了（次の元号開始前）で判定します
+               - 最後に曜日を計算して結果に追記します
+
+               出力:
+               - 西暦の年月日 + 曜日
+               ========================================================= -->
           <!-- select -->
           <div class="form-group">
             <label for="nengou1">From Japanese Calender:</label>
@@ -85,12 +152,33 @@
             </select>
           </div>
 
-          <!-- input -->
+          <!-- 元号年（例: 令和1年、平成5年 など） -->
           <div class="form-group">
             <label for="wareki">Type Japanese Year:</label>
             <input class="form-control" id="wareki" placeholder="Input Year" required type="number">
           </div>
-          <!-- <p><input type="number" id="wareki1" name="wareki" class="form-control" placeholder="Type Japanese year"></p> -->
+          <!-- =========================================================
+               和暦の月日（常に必須）:
+               - JSはまず「元号年 -> 西暦年」を元号開始日から計算
+               - 次に「その月日がその元号の範囲内か」を境界でチェック
+               - 最後に曜日を出します
+          ========================================================= -->
+          <div id="monthDay2" class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <label for="month2">Month:</label>
+                <!-- 月（1-12） -->
+                <input class="form-control" id="month2" placeholder="1-12" min="1" max="12" type="number" required>
+              </div>
+              <div class="col-6">
+                <label for="day2">Date:</label>
+                <!-- 日（1-31）
+                     ※「存在する日付か」はJS側で最終チェックします -->
+                <input class="form-control" id="day2" placeholder="1-31" min="1" max="31" type="number" required>
+              </div>
+            </div>
+          </div>
+          <!-- <p><input type="number" id="wareki1" name="wareki" class="form-control" placeholder="和暦年（旧コード）"></p> -->
           <!-- submit button -->
           <div class="text-center">
             <button class="btn btn-default" id="convert2" type="submit">Convert to Western Calender</button>
